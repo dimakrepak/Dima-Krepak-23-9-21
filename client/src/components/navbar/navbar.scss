@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  padding: 0 15px;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  .left {
+    flex: 1;
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    .navigation {
+      height: 40px;
+      .routes {
+        height: 100%;
+        width: 80px;
+        cursor: pointer;
+      }
+    }
+  }
+}

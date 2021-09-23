@@ -1,0 +1,55 @@
+.searchbar {
+  position: relative;
+  min-width: 300px;
+  width: 30%;
+  height: 40px;
+  .searchbar-wrapper {
+    height: 100%;
+    border-radius: 25px;
+    border: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    z-index: 10;
+    position: relative;
+    background-color: white;
+    .input {
+      flex: 3;
+      height: 100%;
+      border: none;
+      margin-left: 10px;
+      font-size: 16px;
+    }
+    .btn-container {
+      flex: 1;
+      border: none;
+      .search-btn {
+        height: 100%;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+  .autocomplete {
+    position: absolute;
+    width: 100%;
+    top: 25px;
+    z-index: 10;
+    border: 1px solid black;
+    z-index: 0;
+    ul {
+      margin-top: 20px;
+      padding: 5px;
+      list-style: none;
+      background-color: white;
+      .autocomplete-city {
+        text-decoration: none;
+        cursor: pointer;
+        margin: 3px;
+        &:hover {
+          background-color: ghostwhite;
+        }
+      }
+    }
+  }
+}
