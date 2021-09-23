@@ -1,4 +1,5 @@
 import "./navbar.scss";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -8,8 +9,12 @@ export default function Navbar() {
       </div>
       <div className="right">
         <div className="navigation">
-          <button className="routes">Home</button>
-          <button className="routes">Favorites</button>
+          <Link to="/">
+            <button className="routes">Home</button>
+          </Link>
+          <Link to="/favorites">
+            <button className="routes">Favorites</button>
+          </Link>
         </div>
       </div>
     </div>

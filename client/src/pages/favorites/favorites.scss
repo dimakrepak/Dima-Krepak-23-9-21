@@ -1,0 +1,12 @@
+.favorites {
+  position: absolute;
+  .favorites-container {
+    display: flex;
+    padding: 30px;
+    // justify-content: flex-start;
+    // align-items: center;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background-color: beige;
+  }
+}

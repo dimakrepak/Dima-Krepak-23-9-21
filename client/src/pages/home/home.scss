@@ -5,16 +5,10 @@
   .home-container {
     width: 100%;
     height: calc(100% - 70px);
-    padding: 15px;
+    padding: 20px;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
-    .results {
-      width: 80%;
-      height: 90%;
-      background-color: greenyellow;
-      margin-top: 20px;
-    }
   }
 }

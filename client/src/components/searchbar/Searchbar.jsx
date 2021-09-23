@@ -1,8 +1,8 @@
 import "./searchbar.scss";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { updateLocationWeather } from "../../redux/apiCalls";
+import axios from "axios";
 
 export default function Searchbar() {
   const [searchValue, setSearchValue] = useState("");
@@ -32,7 +32,8 @@ export default function Searchbar() {
   }, [searchValue]);
 
   async function handleSearch(city) {
-    updateLocationWeather(city, dispatch);
+    updateLocationWeather(city?.Key, dispatch);
+    setAutocomplete([]);
   }
 
   return (
