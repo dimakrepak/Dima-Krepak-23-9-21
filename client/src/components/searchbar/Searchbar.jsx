@@ -1,13 +1,12 @@
 import "./searchbar.scss";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { update } from "../../redux/locationWeatherSlice";
 import axios from "axios";
+import { updateLocationWeather } from "../../redux/apiCalls";
 
 export default function Searchbar() {
   const [searchValue, setSearchValue] = useState("");
   const [autocomplete, setAutocomplete] = useState([]);
-  const [city, setCity] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function Searchbar() {
       try {
         if (searchValue) {
           const res = await axios({
-            method: "POST",
+            method: "GET",
             url: "/api/autocomplete/",
             data: { searchValue },
             params: {
@@ -32,10 +31,10 @@ export default function Searchbar() {
     getAutocomplete();
   }, [searchValue]);
 
-  function handleSearch(city) {
-    console.log(city);
-    dispatch(update({  city }));
+  async function handleSearch(city) {
+    updateLocationWeather(city, dispatch);
   }
+
   return (
     <div className="searchbar">
       <div className="searchbar-wrapper">

@@ -3,15 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 export const locationWeatherSlice = createSlice({
   name: "locationWeather",
   initialState: {
-    city: "Tel Aviv",
-    celcius: "20c",
+    weather: null,
+    pending: false,
+    error: false,
   },
   reducers: {
-    update: (state, action) => {
-      state.city = action.payload.city;
-      state.celcius = action.payload.celcius;
+    updateStart: (state) => {
+      state.pending = true;
+    },
+    updateSuccess: (state, action) => {
+      state.pending = false;
+      state.weather = action.payload;
+    },
+    updateError: (state) => {
+      state.error = true;
+      state.pending = false;
     },
   },
 });
-export const { update } = locationWeatherSlice.actions;
+export const { updateStart, updateSuccess, updateError } =
+  locationWeatherSlice.actions;
+
 export default locationWeatherSlice.reducer;

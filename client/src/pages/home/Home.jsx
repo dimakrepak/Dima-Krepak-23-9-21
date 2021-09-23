@@ -5,7 +5,7 @@ import "./home.scss";
 
 export default function Home() {
   const locationWeather = useSelector((state) => state.locationWeather);
-  console.log(locationWeather);
+  console.log("redux", locationWeather);
   return (
     <div className="home">
       <Navbar />
