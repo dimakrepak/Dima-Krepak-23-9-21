@@ -2,6 +2,7 @@ import "./searchbar.scss";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateLocationWeather } from "../../redux/apiCalls";
+import { Search } from "@material-ui/icons";
 import axios from "axios";
 
 export default function Searchbar() {
@@ -42,10 +43,11 @@ export default function Searchbar() {
         <input
           type="text"
           className="input"
+          placeholder="Search for a city"
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <div className="btn-container">
-          <button className="search-btn">Search</button>
+          <Search className="search-btn" />
         </div>
       </div>
       {autocomplete.length > 0 && searchValue && (

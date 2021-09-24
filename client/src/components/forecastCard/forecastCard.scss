@@ -1,7 +1,45 @@
 .forecastCard {
-  flex: 1;
-  border: 1px solid black;
   display: flex;
+  margin-right: 15px;
+  padding: 8px;
+  width: 80%;
+  height: 15%;
+  background-color: #ffff;
+  border-radius: 10px;
   align-items: center;
-  flex-flow: column;
+  justify-content: space-between;
+  .day {
+    display: flex;
+    flex-flow: column;
+    .week-day {
+      font-size: 23px;
+      font-weight: 600;
+    }
+    .small {
+      font-size: 13px;
+    }
+  }
+  .temperature {
+    display: flex;
+    span {
+      margin: 2px;
+      font-size: 22px;
+    }
+    .t-min {
+      color: rgba(0, 0, 0, 0.466);
+    }
+  }
+  @media screen and (max-width: 600px) {
+    margin: 10px 0 0 0;
+    width: 100%;
+    border-radius: 0;
+    .day {
+      .week-day {
+        font-size: 16px;
+      }
+      .small {
+        font-size: 10px;
+      }
+    }
+  }
 }

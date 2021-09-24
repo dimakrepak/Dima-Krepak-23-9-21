@@ -5,18 +5,15 @@ export default function FavoriteCard({ day }) {
   return (
     <div className="forecastCard">
       <div className="day">
-        <span>{moment(day?.Date, "YYYY-MM-DD HH:mm:ss").format("dddd")}</span>
-      </div>
-      <div className="day">
-        <span>{`Day: ${day?.Day.IconPhrase}`}</span>
-      </div>
-      <div className="night">
-        <span>{`Night: ${day?.Night.IconPhrase}`}</span>
+        <span className="week-day">
+          {moment(day?.Date, "YYYY-MM-DD HH:mm:ss").format("dddd")}
+        </span>
+        <span className="small">{`Day: ${day?.Day.IconPhrase}`}</span>
+        <span className="small">{`Night: ${day?.Night.IconPhrase}`}</span>
       </div>
       <div className="temperature">
-        <span>
-          {`${day?.Temperature.Maximum.Value} ${day?.Temperature.Minimum.Value} ${day?.Temperature.Minimum.Unit}`}
-        </span>
+        <span className="t-max">{day?.Temperature.Maximum.Value + "°"}</span>
+        <span className="t-min">{day?.Temperature.Minimum.Value + "°"}</span>
       </div>
     </div>
   );

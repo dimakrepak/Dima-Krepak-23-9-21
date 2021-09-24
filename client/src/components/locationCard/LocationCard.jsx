@@ -34,10 +34,11 @@ export default function LocationCard({ currentWeather }) {
               {`${currentWeather?.location.EnglishName}, ${currentWeather?.location.Country.EnglishName}`}
             </span>
           </div>
-          <div className="icon">ICON</div>
           <div className="temperature">
-            <span>{`${currentWeather?.currentConditions.Temperature.Metric.Value} ${currentWeather?.currentConditions.Temperature.Metric.Unit}`}</span>
-            <span>{currentWeather?.currentConditions.WeatherText}</span>
+            <span>{`${currentWeather?.currentConditions.Temperature.Metric.Value}° ${currentWeather?.currentConditions.Temperature.Metric.Unit}`}</span>
+            <span className="weather-text">
+              {currentWeather?.currentConditions.WeatherText}
+            </span>
           </div>
         </div>
       </div>
@@ -51,14 +52,14 @@ export default function LocationCard({ currentWeather }) {
           className="add-favorites"
           onClick={() => handleFavorites("add")}
         >
-          Add to favorites
+          Save
         </button>
       ) : (
         <button
-          className="add-favorites"
+          className="add-favorites saved"
           onClick={() => handleFavorites("remove")}
         >
-          Remove from favorites
+          Saved
         </button>
       )}
     </div>
