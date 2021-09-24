@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
+require("dotenv").config();
 
 router
   .get("/autocomplete", async (req, res) => {
@@ -11,7 +12,7 @@ router
           method: "GET",
           url: "https://dataservice.accuweather.com/locations/v1/cities/autocomplete",
           params: {
-            apikey: "	qfNTopV5mOYGB5so9T0eVzGDXACqCAEW",
+            apikey: process.env.API_KEY,
             q: q,
           },
         });
@@ -23,6 +24,7 @@ router
   })
   .get("/weather/:locationKey", async (req, res) => {
     const { locationKey } = req.params;
+    const { type } = req.query;
     try {
       if (locationKey) {
         const currentConditions = await axios({
@@ -31,7 +33,7 @@ router
             "http://dataservice.accuweather.com/currentconditions/v1/" +
             locationKey,
           params: {
-            apikey: "	qfNTopV5mOYGB5so9T0eVzGDXACqCAEW",
+            apikey: process.env.API_KEY,
           },
         });
 
@@ -41,21 +43,28 @@ router
             "http://dataservice.accuweather.com/forecasts/v1/daily/5day/" +
             locationKey,
           params: {
-            apikey: "	qfNTopV5mOYGB5so9T0eVzGDXACqCAEW",
+            apikey: process.env.API_KEY,
           },
         });
         const location = await axios({
           method: "GET",
           url: "http://dataservice.accuweather.com/locations/v1/" + locationKey,
           params: {
-            apikey: "	qfNTopV5mOYGB5so9T0eVzGDXACqCAEW",
+            apikey: process.env.API_KEY,
           },
         });
-        res.status(200).send({
-          dailyForecasts: dailyForecasts?.data,
-          currentConditions: currentConditions?.data[0],
-          location: location?.data,
-        });
+        if (type === "current") {
+          res.status(200).send({
+            currentConditions: currentConditions?.data[0],
+            location: location?.data,
+          });
+        } else if (type === "all") {
+          res.status(200).send({
+            dailyForecasts: dailyForecasts?.data,
+            currentConditions: currentConditions?.data[0],
+            location: location?.data,
+          });
+        }
       }
     } catch (err) {
       console.log(err);

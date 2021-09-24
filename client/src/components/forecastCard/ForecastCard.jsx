@@ -2,9 +2,8 @@ import moment from "moment";
 import "./forecastCard.scss";
 
 export default function FavoriteCard({ day }) {
-  console.log(day);
   return (
-    <div className="favoriteCard">
+    <div className="forecastCard">
       <div className="day">
         <span>{moment(day?.Date, "YYYY-MM-DD HH:mm:ss").format("dddd")}</span>
       </div>

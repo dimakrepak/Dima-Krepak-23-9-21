@@ -11,6 +11,9 @@ export const updateLocationWeather = async (city, dispatch) => {
     const res = await axios({
       method: "GET",
       url: "/api/weather/" + city,
+      params: {
+        type: "all",
+      },
     });
     console.log(res.data);
     dispatch(updateSuccess(res.data));

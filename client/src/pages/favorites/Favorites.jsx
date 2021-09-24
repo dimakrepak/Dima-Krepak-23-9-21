@@ -1,18 +1,19 @@
 import Navbar from "../../components/navbar/Navbar";
-import { useDispatch, useSelector } from "react-redux";
 import "./favorites.scss";
-import FavoriteCard from "../../components/forecastCard/ForecastCard";
+import { useSelector } from "react-redux";
+import FavoriteCard from "../../components/favoritesCard/FavoriteCard";
 
 export default function Favorites() {
   const favorites = useSelector((state) => state.favorites.favorites);
+
   console.log(favorites);
   return (
     <div className="favorites">
       <Navbar />
       <div className="favorites-container">
-        {favorites.map((favorite) => {
-          // <FavoriteCard favoriteLocationKey={favorite} />;
-        })}
+        {favorites.map((favorite) => (
+          <FavoriteCard key={favorite} favoriteLocationKey={favorite} />
+        ))}
       </div>
     </div>
   );

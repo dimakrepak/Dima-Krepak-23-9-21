@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const router = require("./server/routes");
 
+
 //Middleware
 app.use(express.json());
 app.use("/api", router);

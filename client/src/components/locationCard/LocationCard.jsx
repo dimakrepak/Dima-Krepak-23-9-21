@@ -13,15 +13,15 @@ export default function LocationCard({ currentWeather }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsLocationFavorite(favorites.includes(currentWeather.location.Key));
+    setIsLocationFavorite(favorites.includes(currentWeather?.location.Key));
   }, [favorites, currentWeather]);
 
   function handleFavorites(action) {
     if (action === "add") {
-      dispatch(addToFavorites(currentWeather.location.Key));
+      dispatch(addToFavorites(currentWeather?.location.Key));
     }
     if (action === "remove") {
-      dispatch(removeFromFavorites(currentWeather.location.Key));
+      dispatch(removeFromFavorites(currentWeather?.location.Key));
     }
   }
   console.log(isLocationFavorite);
@@ -31,19 +31,19 @@ export default function LocationCard({ currentWeather }) {
         <div className="currentWeather">
           <div className="location">
             <span>
-              {`${currentWeather.location.EnglishName}, ${currentWeather.location.Country.EnglishName}`}
+              {`${currentWeather?.location.EnglishName}, ${currentWeather?.location.Country.EnglishName}`}
             </span>
           </div>
           <div className="icon">ICON</div>
           <div className="temperature">
-            <span>{`${currentWeather.currentConditions.Temperature.Metric.Value} ${currentWeather.currentConditions.Temperature.Metric.Unit}`}</span>
-            <span>{currentWeather.currentConditions.WeatherText}</span>
+            <span>{`${currentWeather?.currentConditions.Temperature.Metric.Value} ${currentWeather?.currentConditions.Temperature.Metric.Unit}`}</span>
+            <span>{currentWeather?.currentConditions.WeatherText}</span>
           </div>
         </div>
       </div>
       <div className="end">
-        {currentWeather.dailyForecasts.DailyForecasts.map((forecast) => (
-          <ForecastCard day={forecast} />
+        {currentWeather?.dailyForecasts.DailyForecasts.map((forecast, i) => (
+          <ForecastCard key={i} day={forecast} />
         ))}
       </div>
       {!isLocationFavorite ? (
