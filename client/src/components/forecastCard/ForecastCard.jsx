@@ -1,5 +1,5 @@
 import moment from "moment";
-import "./favoriteCard.scss";
+import "./forecastCard.scss";
 
 export default function FavoriteCard({ day }) {
   console.log(day);
@@ -12,7 +12,7 @@ export default function FavoriteCard({ day }) {
         <span>{`Day: ${day?.Day.IconPhrase}`}</span>
       </div>
       <div className="night">
-      <span>{`Night: ${day?.Night.IconPhrase}`}</span>
+        <span>{`Night: ${day?.Night.IconPhrase}`}</span>
       </div>
       <div className="temperature">
         <span>

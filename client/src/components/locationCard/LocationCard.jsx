@@ -1,4 +1,5 @@
-import FavoriteCard from "../favoriteCard/FavoriteCard";
+import ForecastCard from "../forecastCard/ForecastCard";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavorites,
@@ -7,13 +8,23 @@ import {
 import "./locationCard.scss";
 
 export default function LocationCard({ currentWeather }) {
-  const favorites = useSelector((state) => state.favorites);
+  const [isLocationFavorite, setIsLocationFavorite] = useState(false);
+  const favorites = useSelector((state) => state.favorites.favorites);
   const dispatch = useDispatch();
 
-  function handleFavorites() {
-    console.log("click");
-    dispatch(addToFavorites(currentWeather));
+  useEffect(() => {
+    setIsLocationFavorite(favorites.includes(currentWeather.location.Key));
+  }, [favorites, currentWeather]);
+
+  function handleFavorites(action) {
+    if (action === "add") {
+      dispatch(addToFavorites(currentWeather.location.Key));
+    }
+    if (action === "remove") {
+      dispatch(removeFromFavorites(currentWeather.location.Key));
+    }
   }
+  console.log(isLocationFavorite);
   return (
     <div className="locationCard">
       <div className="start">
@@ -31,15 +42,25 @@ export default function LocationCard({ currentWeather }) {
         </div>
       </div>
       <div className="end">
-        <FavoriteCard day={currentWeather.dailyForecasts.DailyForecasts[0]} />
-        <FavoriteCard />
-        <FavoriteCard />
-        <FavoriteCard />
-        <FavoriteCard />
+        {currentWeather.dailyForecasts.DailyForecasts.map((forecast) => (
+          <ForecastCard day={forecast} />
+        ))}
       </div>
-      <button className="add-favorites" onClick={handleFavorites}>
-        Add to favorites
-      </button>
+      {!isLocationFavorite ? (
+        <button
+          className="add-favorites"
+          onClick={() => handleFavorites("add")}
+        >
+          Add to favorites
+        </button>
+      ) : (
+        <button
+          className="add-favorites"
+          onClick={() => handleFavorites("remove")}
+        >
+          Remove from favorites
+        </button>
+      )}
     </div>
   );
 }
