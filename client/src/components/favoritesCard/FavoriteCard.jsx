@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { updateLocationWeather } from "../../redux/apiCalls";
 import { removeFromFavorites } from "../../redux/favoritesSlice";
 import { useState, useEffect } from "react";
+import { DeleteOutline } from "@material-ui/icons";
 
 export default function FavoriteCard({ favoriteLocationKey }) {
   const [currentWeather, setCurrentWeather] = useState("");
@@ -28,7 +29,6 @@ export default function FavoriteCard({ favoriteLocationKey }) {
             type: "current",
           },
         });
-        console.log(res.data);
         setCurrentWeather(res.data);
       } catch (err) {
         console.log(err);
@@ -42,11 +42,13 @@ export default function FavoriteCard({ favoriteLocationKey }) {
         <span>{`${currentWeather?.location?.LocalizedName}, ${currentWeather?.location?.Country?.EnglishName}`}</span>
       </div>
       <div className="currentWeather">
-        <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Value} `}</span>
+        <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Value}° `}</span>
         <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Unit}`}</span>
       </div>
-      <button onClick={handleOpenClick}>Open</button>
-      <button onClick={handleDeleteClick}>Delete</button>
+      <button className="open" onClick={handleOpenClick}>
+        Open
+      </button>
+      <DeleteOutline className="delete" onClick={handleDeleteClick} />
     </div>
   );
 }

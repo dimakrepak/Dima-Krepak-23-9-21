@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const locationWeatherSlice = createSlice({
   name: "locationWeather",
   initialState: {
-    weather: JSON.parse(localStorage.getItem("defaultWeather")) || null,
+    weather: null,
     pending: false,
     error: false,
   },
