@@ -3,10 +3,9 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateLocationWeather } from "../../redux/apiCalls";
-
 import { removeFromFavorites } from "../../redux/favoritesSlice";
 import { useState, useEffect } from "react";
-import { DeleteOutline } from "@material-ui/icons";
+import { HighlightOff } from "@material-ui/icons";
 import { CircularProgress } from "@material-ui/core";
 
 export default function FavoriteCard({ favoriteLocationKey }) {
@@ -74,7 +73,7 @@ export default function FavoriteCard({ favoriteLocationKey }) {
           <button className="open" onClick={handleOpenClick}>
             Open
           </button>
-          <DeleteOutline className="delete" onClick={handleDeleteClick} />
+          <HighlightOff className="delete" onClick={handleDeleteClick} />
         </>
       )}
     </div>

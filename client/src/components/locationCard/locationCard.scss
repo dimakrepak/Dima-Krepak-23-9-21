@@ -65,15 +65,16 @@
     cursor: pointer;
     width: 80px;
     height: 40px;
-    background-color: rgb(53, 176, 233);
-    border: none;
+    background-color: #ffff;
+    border: 2px solid rgb(255, 102, 102);
     border-radius: 10px;
-    color: #ffff;
+    color: rgb(255, 102, 102);
     font-size: 15px;
     font-weight: bold;
-    transition: all 0.2s ease-in;
+    transition: all 0.5s ease-in;
     &.saved {
-      background-color: rgb(33, 118, 158);
+      background-color: rgb(255, 102, 102);
+      color:#ffff;
     }
   }
   @media screen and (max-width: 600px) {
