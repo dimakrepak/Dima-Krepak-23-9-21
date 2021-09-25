@@ -25,7 +25,6 @@ export default function LocationCard({ currentWeather }) {
       dispatch(removeFromFavorites(currentWeather?.location.Key));
     }
   }
-  console.log(currentWeather);
   return (
     <div className="locationCard">
       <div className="start">

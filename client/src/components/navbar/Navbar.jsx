@@ -9,7 +9,6 @@ export default function Navbar() {
   const isCelcius = useSelector((state) => state.conversion.isCelcius);
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
   return (
     <div className="navbar">
       <div className="left">
@@ -21,6 +20,7 @@ export default function Navbar() {
             className="unit-toggle"
             selected={isCelcius}
             onClick={() => dispatch(changeUnit(true))}
+            value=""
           >
             C
           </ToggleButton>
@@ -28,6 +28,7 @@ export default function Navbar() {
             className="unit-toggle"
             selected={!isCelcius}
             onClick={() => dispatch(changeUnit(false))}
+            value=""
           >
             F
           </ToggleButton>
@@ -38,6 +39,7 @@ export default function Navbar() {
             <ToggleButton
               selected={location.pathname === "/"}
               className="routes"
+              value=""
             >
               Home
             </ToggleButton>
@@ -46,6 +48,7 @@ export default function Navbar() {
             <ToggleButton
               selected={location.pathname === "/favorites"}
               className="routes"
+              value=""
             >
               Favorites
             </ToggleButton>

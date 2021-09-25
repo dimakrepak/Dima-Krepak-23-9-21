@@ -1,10 +1,5 @@
 import "./App.scss";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home/Home.jsx";
 import Favorites from "./pages/favorites/Favorites";
 

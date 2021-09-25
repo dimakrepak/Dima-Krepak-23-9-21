@@ -7,7 +7,6 @@
   background-color: #f7f6f9;
   border-radius: 10px;
   overflow: hidden;
-
   .start {
     position: relative;
     background-color: #ffff;
@@ -39,6 +38,11 @@
         // margin-top: 45px;
         .location {
           font-size: 30px;
+        }
+      }
+      @media screen and (max-width: 400px) {
+        .location {
+          font-size: 20px;
         }
       }
     }

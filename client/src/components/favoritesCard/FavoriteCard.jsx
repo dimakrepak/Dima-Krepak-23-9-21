@@ -42,7 +42,7 @@ export default function FavoriteCard({ favoriteLocationKey }) {
       }
     }
     getCurrentWeather();
-  }, []);
+  }, [favoriteLocationKey]);
   return (
     <div className="favoriteCard">
       {isLoading ? (

@@ -23,7 +23,6 @@ export default function Searchbar() {
               q: searchValue,
             },
           });
-          console.log(res.data);
           setAutocomplete(res.data);
         }
       } catch (err) {
@@ -39,7 +38,6 @@ export default function Searchbar() {
   }, [searchValue]);
 
   async function handleSearch(city) {
-    // console.log(/^[a-z]+$/i.test(searchValue));
     updateLocationWeather(city?.Key, dispatch);
     setAutocomplete([]);
     setSearchValue("");
