@@ -35,12 +35,6 @@
         }
       }
       @media screen and (max-width: 600px) {
-        // margin-top: 45px;
-        .location {
-          font-size: 30px;
-        }
-      }
-      @media screen and (max-width: 400px) {
         .location {
           font-size: 20px;
         }
@@ -74,7 +68,7 @@
     transition: all 0.5s ease-in;
     &.saved {
       background-color: rgb(255, 102, 102);
-      color:#ffff;
+      color: #ffff;
     }
   }
   @media screen and (max-width: 600px) {
