@@ -1,5 +1,6 @@
 import Navbar from "../../components/navbar/Navbar";
 import Searchbar from "../../components/searchbar/Searchbar";
+import { useLocation, useHistory } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { updateLocationWeather } from "../../redux/apiCalls";
@@ -9,12 +10,14 @@ import "./home.scss";
 import LocationCard from "../../components/locationCard/LocationCard";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
   const locationWeather = useSelector((state) => state.locationWeather);
   const [geoLocation, setGeoLocation] = useState({
     latitude: "",
     longitude: "",
   });
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -24,9 +27,8 @@ export default function Home() {
           longitude: position.coords.longitude,
         });
       });
-      console.log("Available");
     } else {
-      console.log("Not Available");
+      console.log("Location Not Available");
     }
   }, []);
   useEffect(() => {
@@ -39,15 +41,20 @@ export default function Home() {
             q: `${geoLocation.latitude},${geoLocation.longitude}`,
           },
         });
-        console.log(res.data.Key);
         updateLocationWeather(res.data.Key, dispatch);
-        console.log(res.data);
       } catch (e) {
         console.log(e);
       }
     }
-    getCurrentPositionLocation();
+    if (geoLocation.longitude && geoLocation.latitude) {
+      if (!location.state.fromFavorite) {
+        getCurrentPositionLocation();
+      } else {
+        history.replace("/", { fromFavorite: false });
+      }
+    }
   }, [geoLocation]);
+
 
   return (
     <div className="home">

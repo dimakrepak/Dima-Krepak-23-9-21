@@ -14,7 +14,7 @@ export default function FavoriteCard({ favoriteLocationKey }) {
 
   function handleOpenClick() {
     updateLocationWeather(favoriteLocationKey, dispatch);
-    history.push({ pathname: "/" });
+    history.push("/", { fromFavorite: true });
   }
   function handleDeleteClick() {
     dispatch(removeFromFavorites(favoriteLocationKey));

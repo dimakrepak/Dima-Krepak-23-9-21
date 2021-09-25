@@ -15,7 +15,6 @@ export const updateLocationWeather = async (city, dispatch) => {
         type: "all",
       },
     });
-    console.log(res.data);
     dispatch(updateSuccess(res.data));
   } catch (err) {
     dispatch(updateError(err));
