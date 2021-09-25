@@ -15,15 +15,17 @@
     flex: 1;
   }
   .right {
-    flex: 1;
+    flex: 2;
     display: flex;
     justify-content: flex-end;
     .navigation {
       height: 40px;
+      margin-left: 20px;
       .routes {
         height: 100%;
         width: 80px;
-        cursor: pointer;
+        font-size: 13px;
+        // cursor: pointer;
       }
     }
   }

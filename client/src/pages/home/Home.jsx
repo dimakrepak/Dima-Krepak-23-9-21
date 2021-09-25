@@ -47,14 +47,13 @@ export default function Home() {
       }
     }
     if (geoLocation.longitude && geoLocation.latitude) {
-      if (!location.state.fromFavorite) {
+      if (!location?.state?.fromFavorite && !locationWeather.weather) {
         getCurrentPositionLocation();
       } else {
-        history.replace("/", { fromFavorite: false });
+        history.replace({ fromFavorite: false });
       }
     }
   }, [geoLocation]);
-
 
   return (
     <div className="home">

@@ -8,6 +8,7 @@ import axios from "axios";
 export default function Searchbar() {
   const [searchValue, setSearchValue] = useState("");
   const [autocomplete, setAutocomplete] = useState([]);
+  const [isEnglish, setIsEnglish] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,10 +32,17 @@ export default function Searchbar() {
     }
     getAutocomplete();
   }, [searchValue]);
+  useEffect(() => {
+    if (searchValue) {
+      setIsEnglish(/^[a-z]+$/i.test(searchValue));
+    }
+  }, [searchValue]);
 
   async function handleSearch(city) {
+    // console.log(/^[a-z]+$/i.test(searchValue));
     updateLocationWeather(city?.Key, dispatch);
     setAutocomplete([]);
+    setSearchValue("");
   }
 
   return (
@@ -42,8 +50,9 @@ export default function Searchbar() {
       <div className="searchbar-wrapper">
         <input
           type="text"
+          value={isEnglish ? searchValue : ""}
           className="input"
-          placeholder="Search for a city"
+          placeholder={isEnglish ? "Search for a city" : "English letters only"}
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <div className="btn-container">

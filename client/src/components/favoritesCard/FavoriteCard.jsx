@@ -1,14 +1,18 @@
 import "./favoriteCard.scss";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateLocationWeather } from "../../redux/apiCalls";
+
 import { removeFromFavorites } from "../../redux/favoritesSlice";
 import { useState, useEffect } from "react";
 import { DeleteOutline } from "@material-ui/icons";
+import { CircularProgress } from "@material-ui/core";
 
 export default function FavoriteCard({ favoriteLocationKey }) {
+  const isCelcius = useSelector((state) => state.conversion.isCelcius);
   const [currentWeather, setCurrentWeather] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -22,6 +26,7 @@ export default function FavoriteCard({ favoriteLocationKey }) {
   useEffect(() => {
     async function getCurrentWeather() {
       try {
+        setIsLoading(true);
         const res = await axios({
           method: "GET",
           url: "/api/weather/" + favoriteLocationKey,
@@ -30,25 +35,48 @@ export default function FavoriteCard({ favoriteLocationKey }) {
           },
         });
         setCurrentWeather(res.data);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
+        setIsLoading(true);
       }
     }
     getCurrentWeather();
   }, []);
   return (
     <div className="favoriteCard">
-      <div className="city">
-        <span>{`${currentWeather?.location?.LocalizedName}, ${currentWeather?.location?.Country?.EnglishName}`}</span>
-      </div>
-      <div className="currentWeather">
-        <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Value}° `}</span>
-        <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Unit}`}</span>
-      </div>
-      <button className="open" onClick={handleOpenClick}>
-        Open
-      </button>
-      <DeleteOutline className="delete" onClick={handleDeleteClick} />
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <div className="city">
+            <span>{`${currentWeather?.location?.LocalizedName}, ${currentWeather?.location?.Country?.EnglishName}`}</span>
+          </div>
+          <div className="currentWeather">
+            {isCelcius ? (
+              <>
+                <span>{`${Math.round(
+                  ((currentWeather?.currentConditions?.Temperature.Imperial
+                    .Value -
+                    32) *
+                    5) /
+                    9
+                )}° `}</span>
+                <span>{`C`}</span>
+              </>
+            ) : (
+              <>
+                <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Value}° `}</span>
+                <span>{`${currentWeather?.currentConditions?.Temperature.Imperial.Unit}`}</span>
+              </>
+            )}
+          </div>
+          <button className="open" onClick={handleOpenClick}>
+            Open
+          </button>
+          <DeleteOutline className="delete" onClick={handleDeleteClick} />
+        </>
+      )}
     </div>
   );
 }

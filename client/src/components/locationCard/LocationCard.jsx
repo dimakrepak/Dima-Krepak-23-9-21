@@ -10,6 +10,7 @@ import "./locationCard.scss";
 export default function LocationCard({ currentWeather }) {
   const [isLocationFavorite, setIsLocationFavorite] = useState(false);
   const favorites = useSelector((state) => state.favorites.favorites);
+  const isCelcius = useSelector((state) => state.conversion.isCelcius);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function LocationCard({ currentWeather }) {
       dispatch(removeFromFavorites(currentWeather?.location.Key));
     }
   }
-  console.log(isLocationFavorite);
+  console.log(currentWeather);
   return (
     <div className="locationCard">
       <div className="start">
@@ -35,7 +36,16 @@ export default function LocationCard({ currentWeather }) {
             </span>
           </div>
           <div className="temperature">
-            <span>{`${currentWeather?.currentConditions.Temperature.Metric.Value}° ${currentWeather?.currentConditions.Temperature.Metric.Unit}`}</span>
+            {!isCelcius ? (
+              <span>{`${currentWeather?.currentConditions.Temperature.Imperial.Value}° ${currentWeather?.currentConditions.Temperature.Imperial.Unit}`}</span>
+            ) : (
+              <span>{`${Math.round(
+                ((currentWeather?.currentConditions.Temperature.Imperial.Value -
+                  32) *
+                  5) /
+                  9
+              )}° C`}</span>
+            )}
             <span className="weather-text">
               {currentWeather?.currentConditions.WeatherText}
             </span>

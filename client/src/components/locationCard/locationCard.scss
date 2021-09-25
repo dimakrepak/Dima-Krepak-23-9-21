@@ -11,11 +11,11 @@
   .start {
     position: relative;
     background-color: #ffff;
+    padding: 0 55px;
     flex: 1;
     display: flex;
     justify-content: center;
     .currentWeather {
-      width: 80%;
       display: flex;
       flex-flow: column;
       justify-content: space-evenly;
