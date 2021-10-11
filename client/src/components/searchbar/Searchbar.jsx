@@ -29,8 +29,15 @@ export default function Searchbar() {
         console.log(err);
       }
     }
-    getAutocomplete();
+    
+    const timeout = setTimeout(() => {
+      getAutocomplete();
+    }, 500);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [searchValue]);
+
   useEffect(() => {
     if (searchValue) {
       setIsEnglish(/^[a-z]+$/i.test(searchValue));
